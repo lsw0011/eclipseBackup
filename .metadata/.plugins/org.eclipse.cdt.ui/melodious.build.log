@@ -1,0 +1,15 @@
+18:16:21 **** Incremental Build of configuration Debug for project melodious ****
+make all 
+Building file: ../src/melodious.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/melodious.d" -MT"src/melodious.o" -o "src/melodious.o" "../src/melodious.cpp"
+Finished building: ../src/melodious.cpp
+ 
+Building target: melodious
+Invoking: GCC C++ Linker
+g++  -o "melodious"  ./src/melodious.o   
+Finished building target: melodious
+ 
+
+18:16:22 Build Finished. 0 errors, 0 warnings. (took 1s.202ms)
+

@@ -1,0 +1,57 @@
+
+#pragma GCC diagnostic ignored "-Wunused-result"
+
+#include <cstdio>
+#include <vector>
+#include <cassert>
+#include <algorithm>
+#include <math.h>
+
+using namespace std;
+
+const int CHUNK = 1e7;
+const int CHUNK_FIRST = 2222222;
+const int CHUNK_LAST = 7777777;
+const int CHUNK_REMAINDER = 777777;
+const int MAX = 1e15;
+
+vector <int> primes;
+
+void getPrimes(int max){
+	vector <bool> isPrime(1 + max, true);
+	isPrime[0] = 0;
+	isPrime[1] = 0;
+	for(int i = 2; i * i <= max ; i++){
+		if(isPrime[i])
+			for(int j = i; i * j <= max ; j++)
+				isPrime[i] = 0;
+	}
+	for(int i = 0; i < isPrime.size(); i++){
+		if(isPrime[i]){
+			primes.push_back(i);
+		}
+	}
+}
+
+int main(){
+	long long first, last;
+	scanf("%lld %lld", &first, &last);
+	int count = 0;
+	getPrimes(sqrt(MAX));
+//	if( last <= CHUNK_REMAINDER){
+//		count = getMegaPrimes(first, last);
+//	}else{
+//		if ( first <= CHUNK_REMAINDER){
+//			count = getMegaPrimes(first, CHUNK_REMAINDER);
+//			first = CHUNK_REMAINDER + 1;
+//		}
+//		for(long long firstPart = first / CHUNK * CHUNK + CHUNK_FIRST; firstPart <= last; firstPart += CHUNK){
+//			if(hasOnlyPrimeDigits(firstPart)){
+//				long long lastPart = firstPart - CHUNK_FIRST + CHUNK_LAST;
+//				count += getMegaPrimes(max(firstPart, first), min(lastPart, last));
+//			}
+//		}
+//	}
+
+
+}

@@ -1,0 +1,47 @@
+//============================================================================
+// Name        : melodious.cpp
+// Author      : 
+// Version     :
+// Copyright   : Your copyright notice
+// Description : Hello World in C++, Ansi-style
+//============================================================================
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int n, m;
+char vowels[6] = {"aeiou"};
+char consonants[21] = { "bcdfghjklmnpqrstvwxz"};
+string cur = "";
+
+
+void drill(int n, int vowel){
+	if(n == 0){
+		cout << endl;
+		return;
+	}else{
+		if(vowel){
+			for(int i = 0; i < 5; i++){
+				cur.push_back(vowels[i]);
+				drill(n-1, 1-vowel);
+				cur.pop_back(vowels[i]);
+			}
+		}else{
+			for(int i = 0; i < 20; i++){
+				cur.push_back(consonants[i]);
+				drill(cur, 1-vowel);
+				cur.pop_back(vowels[i]);
+			}
+		}
+	}
+}
+
+int main() {
+	cin >> n;
+	m = n;
+	drill(n, 1);
+	drill(n, 0);
+	return 0;
+}

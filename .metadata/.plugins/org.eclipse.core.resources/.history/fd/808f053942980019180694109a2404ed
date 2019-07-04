@@ -1,0 +1,72 @@
+//============================================================================
+// Name        : gloriousPrimes.cpp
+// Author      : 
+// Version     :
+// Copyright   : Your copyright notice
+// Description : Hello World in C++, Ansi-style
+//============================================================================
+
+#include <iostream>
+#include <stdio.h>
+#include <string.h>
+
+using namespace std;
+int n = 6;
+int count = 0;
+int memoCount = 0;
+int memo[10][10][6];
+int traveled[10][10][6];
+int num[8][5];
+int primes[14] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43} ;
+
+void check(int d){
+	if(d == n){
+		count++;
+		return;
+	}
+	for(int i = 0; i < 10; i++){
+		if(d == 0 && i == 0){
+			i++;
+		}
+		int j = 0;
+		int flag;
+
+		while(j < 5 && j <= d){
+			if(min(d, 4) - j > 0){
+				num[max(d-4, 0)+j][min(d, 4) - j] = i + num[max(d-4, 0)+j][min(d, 4) - j - 1];
+			}else{
+				num[max(d-4, 0)+j][min(d, 4) - j] = i;
+			}
+			if(min(d, 4) - j > 1 ){
+				flag = 0;
+				for(int prime: primes){
+					if(prime == num[max(d-4, 0)+j][min(d, 4) - j]){
+						flag = 1;
+						break;
+					}
+				}
+				if(!flag){
+					break;
+				}
+			}
+			j++;
+		}
+		if(flag || d < 2){
+			if(n - d == 3){
+				check(d + 1);
+				cout << "memo[" << num[d-1][0] << "][" << num[d][0] << "]" << endl;
+			}else{
+				check(d + 1);
+			}
+		}
+
+	}
+}
+
+int main() {
+	memset(num, 0, n*5);
+	memset(traveled, false, 10*10*6);
+	memset(memo, 0, 10*10*6);
+	check(0);
+	cout << count;
+}

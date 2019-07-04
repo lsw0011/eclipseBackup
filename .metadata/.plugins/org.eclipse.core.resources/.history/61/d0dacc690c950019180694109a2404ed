@@ -1,0 +1,64 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define pii pair<int,int>
+#define F first
+#define S second
+#define mp make_pair
+#define eb emplace_back
+const int N = 1e5+10;
+ll f[2][N];
+bool machine[N];
+vector<pii> con[N];
+const ll inf = 1e18;
+ll time = 0;
+inline int maxBranch(vector <int> branches){
+	int max = 0;
+	for(int i = 0; i < branches.size(); i++){
+		if(branches[i] == -1)
+			continue;
+		if(max < branches[i]){
+			time += max;
+			max = branches[i];
+		}
+	}
+	if(max)
+		return max;
+	return -1;
+}
+int dfs(int s, int p, int dist){
+	vector<int> branches;
+	for(auto it: con[s]){
+		if(it.F == p)
+			continue;
+		branches.push_back(dfs(it.F, s, it.S));
+	}
+	if(branches.size() == 0){
+		if(machine[s]){
+			return dist;
+		}else{
+			return -1;
+		}
+	}else{
+		return min(maxBranch(branches), dist);
+	}
+}
+int main(){
+	for(int i = 0;i<N;i++) f[1][i] = f[0][i] = inf;
+	int n, k, u, v, w;
+	cin >> 	n >> k;
+	for(int i = 0; i < n - 1; i++){
+		cin >> u >> v >> w;
+		con[u].eb(mp(v,w));
+		con[v].eb(mp(u,w));
+	}
+	int rt = -1;
+	for(int i  = 0; i < k; i++){
+		int node;
+		cin >> node;
+		machine[node] = 1;
+		rt = node;
+	}
+	cout << dfs(rt, -1);
+	cout << min(f[0][rt], f[1][rt]) << endl;
+}

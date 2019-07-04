@@ -1,0 +1,23 @@
+22:32:12 **** Incremental Build of configuration Debug for project matrix ****
+make all 
+Building file: ../src/matrix.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/matrix.d" -MT"src/matrix.o" -o "src/matrix.o" "../src/matrix.cpp"
+../src/matrix.cpp: In function ‘int maxBranch(std::vector<int>)’:
+../src/matrix.cpp:17:19: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for(int i = 0; i < branches.size(); i++){
+                 ~~^~~~~~~~~~~~~~~~~
+../src/matrix.cpp: In function ‘int sumBranches(std::vector<int>)’:
+../src/matrix.cpp:33:19: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for(int i = 0; i < branches.size(); i++){
+                 ~~^~~~~~~~~~~~~~~~~
+Finished building: ../src/matrix.cpp
+ 
+Building target: matrix
+Invoking: GCC C++ Linker
+g++  -o "matrix"  ./src/matrix.o   
+Finished building target: matrix
+ 
+
+22:32:14 Build Finished. 0 errors, 2 warnings. (took 2s.130ms)
+

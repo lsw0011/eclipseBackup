@@ -1,0 +1,6 @@
+00:06:11 **** Incremental Build of configuration Debug for project gloriousPrimes ****
+make all 
+make: Nothing to be done for 'all'.
+
+00:06:12 Build Finished. 0 errors, 0 warnings. (took 574ms)
+

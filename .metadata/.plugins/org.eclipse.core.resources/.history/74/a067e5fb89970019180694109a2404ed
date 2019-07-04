@@ -1,0 +1,29 @@
+//============================================================================
+// Name        : gloriousPrimes.cpp
+// Author      : 
+// Version     :
+// Copyright   : Your copyright notice
+// Description : Hello World in C++, Ansi-style
+//============================================================================
+
+#include <iostream>
+#include <stdio.h>
+#include <string.h>
+
+using namespace std;
+int n = 6;
+int string[n][5];
+
+void check(int d){
+	for(int i = 0; i < 10; i++){
+		int j = 0;
+		while(d + j < n && j < 5 && j <= d){
+			string[d + j][min(d, 4)] += i;
+		}
+	}
+}
+
+int main() {
+	int primes[15] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43} ;
+	memset(string, 0, n*5);
+}

@@ -1,0 +1,99 @@
+//============================================================================
+// Name        : gloriousPrimes.cpp
+// Author      : 
+// Version     :
+// Copyright   : Your copyright notice
+// Description : Hello World in C++, Ansi-style
+//============================================================================
+
+#include <iostream>
+#include <stdio.h>
+#include <string.h>
+#include <vector>
+
+using namespace std;
+
+vector<int> validStrings;
+
+int n = 50;
+int count = 0;
+int memoCount = 0;
+int memo[10][10][10][10][50];
+int traveled[10][10][10][10][50];
+
+int num[8][5];
+int primes[14] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43} ;
+
+
+void check(int d){
+	if(d == n){
+		memo[num[d-5][0]][num[d-4][0]][num[d-3][0]][num[d-2][0]][d-1]++;
+		count++;
+		int flag = true;
+		int test = num[d-5][0] * 10000 + num[d-4][0] * 1000 + num[d-3][0] * 100 + num[d-2][0] * 10 + num[d-1][0];
+		for(int number : validStrings){
+			if(number == test){
+				flag = false;
+			}
+		}
+		if(flag == true){
+			validStrings.push_back(test);
+		}
+		cout << num[d-7][0] << " " << num[d-6][0] << " " << num[d-5][0] << " " << num[d-4][0] << " " << num[d-3][0] << " " << num[d-2][0] << " " << num[d-1][0] << endl;
+		return;
+	}
+	for(int i = 0; i < 10; i++){
+		if(d == 0 && i == 0){
+			i++;
+		}
+		int j = 0;
+		int flag;
+
+		while(j < 5 && j <= d){
+			if(min(d, 4) - j > 0){
+				num[max(d-4, 0)+j][min(d, 4) - j] = i + num[max(d-4, 0)+j][min(d, 4) - j - 1];
+			}else{
+				num[max(d-4, 0)+j][min(d, 4) - j] = i;
+			}
+			if(min(d, 4) - j > 1 ){
+				flag = 0;
+				for(int prime: primes){
+					if(prime == num[max(d-4, 0)+j][min(d, 4) - j]){
+						flag = 1;
+						break;
+					}
+				}
+				if(!flag){
+					break;
+				}
+			}
+			j++;
+		}
+		if(flag || d < 2){
+			if(traveled[num[d-3][0]][num[d-2][0]][num[d-1][0]][num[d][0]][d+1]){
+				memo[num[d-4][0]][num[d-3][0]][num[d-2][0]][num[d-1][0]][d] += memo[num[d-3][0]][num[d-2][0]][num[d-1][0]][num[d][0]][d+1];
+				continue;
+			}else{
+				check(d + 1);
+				if(n - d > 1){
+					memo[num[d-4][0]][num[d-3][0]][num[d-2][0]][num[d-1][0]][d] += memo[num[d-3][0]][num[d-2][0]][num[d-1][0]][num[d][0]][d+1];
+				}
+			}
+		}
+	}
+	if(d != 5 && d != 6){
+		cout << num[d-4][0] << " " << num[d-3][0] << " " << num[d-2][0] << " " << num[d-1][0] << " " << d << " = " << memo[num[d-4][0]][num[d-3][0]][num[d-2][0]][num[d-1][0]][d] << endl;
+	}
+	traveled[num[d-4][0]][num[d-3][0]][num[d-2][0]][num[d-1][0]][d] = true;
+}
+
+int main() {
+	memset(num, 0, n*5);
+	memset(traveled, false, 10*10*10*10*n);
+	memset(memo, 0, 10*10*10*10*n);
+	check(0);
+	cout << memo[0][0][0][0][0] << endl;
+	cout << validStrings.size();
+}
+
+

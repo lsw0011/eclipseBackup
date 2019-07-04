@@ -1,0 +1,36 @@
+
+#pragma GCC diagnostic ignored "-Wunused-result"
+
+#include <cstdio>
+#include <vector>
+#include <cassert>
+#include <algorithm>
+#include <math.h>
+
+using namespace std;
+
+const int CHUNK = 1e7;
+const int CHUNK_FIRST = 2222222;
+const int CHUNK_LAST = 7777777;
+const int CHUNK_REMAINDER = 777777;
+const int MAX = 1e15;
+
+vector <int> primes;
+vector <bool> isPrime;
+
+int main(){
+	long long first, last;
+	scanf("%lld %lld", &first, &last);
+
+	if( last <= CHUNK_REMAINDER){
+		int count = getMegaPrimes(first, last);
+	}else{
+		if ( first <= CHUNK_REMAINDER){
+			int count = getMegaPrimes(first, CHUNK_REMAINDER);
+			first = CHUNK_REMAINDER + 1;
+
+		}
+	}
+
+
+}

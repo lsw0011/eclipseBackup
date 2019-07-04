@@ -1,0 +1,84 @@
+
+#include <vector>
+#include <set>
+#include <iostream>
+#include <cstdio>
+
+using namespace std;
+
+const int INF = 1000000000;
+const int MAX_NODES = 1000 + 10;
+const int TYPES = 1024 + 10;
+
+
+vector<pair<int, int>> connectionMap[MAX_NODES];
+int typesOffered[MAX_NODES];
+int traveledPaths[MAX_NODES][TYPES];
+set<pair<int, pair<int, int> > > locations;
+int centers, roads, types;
+int cti, cni;
+int center1, center2, dist;
+int typesMask;
+
+inline void push_location(int currentLocation, int currentItems, int currentDistanceTraveled){
+	if (traveledPaths[currentLocation][currentItems] <= currentDistanceTraveled)
+		return;
+
+	pair<int, pair<int, int> > mp = make_pair(traveledPaths[currentLocation][currentItems], make_pair(currentLocation, currentItems));
+ 	if (locations.find(mp) != locations.end())
+ 		locations.erase(locations.find(mp));
+	traveledPaths[currentLocation][currentItems] = currentDistanceTraveled;
+	mp.first = currentDistanceTraveled;
+	locations.insert(mp);
+}
+
+inline void push (int currentLocation, int currentItems, int currentDistanceTraveled) {
+	if (traveledPaths[currentLocation][currentItems] <= currentDistanceTraveled)
+		return;
+	pair<int, pair<int, int> > mp = make_pair(traveledPaths[currentLocation][currentItems], make_pair(currentLocation, currentItems));
+	if (locations.find(mp) != locations.end())
+		locations.erase(locations.find(mp));
+	traveledPaths[currentLocation][currentItems] = currentDistanceTraveled;
+	mp.first = currentDistanceTraveled;
+	locations.insert(mp);
+}
+
+int main(){
+	cin >> centers >> roads >> types;
+	for(int center = 1; center <= centers; center++){
+		cin >> cni;
+		for(int i = 0; i < cni; i++){
+			cin >> cti;
+			typesOffered[center] |= (1 << (cti - 1));
+		}
+//		cout << typesOffered[center] << endl;
+	}
+	for(int road = 1; road <= roads; road++){
+		cin >> center1 >> center2 >> dist;
+		connectionMap[center1].push_back(make_pair(center2, dist));
+		connectionMap[center2].push_back(make_pair(center1, dist));
+	}
+	for(int i = 0; i < MAX_NODES; i++){
+		for(int j = 0; j < (1 << types); j++){
+			traveledPaths[i][j] = INF;
+		}
+	}
+	push_location(1, typesOffered[1], 0);
+	while(locations.size() > 0){
+		int startingPoint = locations.begin()->second.first;
+		int startingItems = locations.begin()->second.second;
+//		int startingDistance = locations.begin()->second.second;
+		locations.erase(locations.begin());
+//		cout << connectionMap[startingPoint].size() << endl;
+		for(int option = 0; option < connectionMap[startingPoint].size(); option++){
+			push_location(connectionMap[startingPoint][option].first, typesOffered[connectionMap[startingPoint][option].first] | startingItems, traveledPaths[startingPoint][startingItems] + connectionMap[startingPoint][option].second);
+		}
+	}
+	int ret = INF;
+	for(int i = 0; i < (1 << types); i++)
+		for(int j = i; j < (1 << types); j++)
+			 if ((i | j) == ((1 << types) - 1))
+				 ret = min(ret, max(traveledPaths[centers][i], traveledPaths[centers][j]));
+	cout << ret << endl;
+	return 0;
+}

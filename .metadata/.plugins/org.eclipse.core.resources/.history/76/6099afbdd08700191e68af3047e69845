@@ -1,0 +1,23 @@
+
+#include <vector>
+#include <set>
+#include <iostream>
+#include <cstdio>
+
+using namespace std;
+
+const int INF = 1000000000;
+const int MAX_NODES = 1000 + 10;
+const int TYPES = 1024 + 10;
+
+
+vector<pair<int, int>> connectionMap;
+int typesOffered[MAX_NODES];
+int traveledPaths[MAX_NODES][TYPES];
+set<pair<int, pair<int, int> > > decisions;
+int paths, roads, types;
+
+int main(){
+	cin >> paths >> roads >> types;
+	cout << paths << " " << roads << " " << types;
+}

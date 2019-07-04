@@ -1,0 +1,15 @@
+16:47:42 **** Build of configuration Debug for project melod ****
+make all 
+Building file: ../src/melod.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/melod.d" -MT"src/melod.o" -o "src/melod.o" "../src/melod.cpp"
+Finished building: ../src/melod.cpp
+ 
+Building target: melod
+Invoking: GCC C++ Linker
+g++  -o "melod"  ./src/melod.o   
+Finished building target: melod
+ 
+
+16:47:44 Build Finished. 0 errors, 0 warnings. (took 1s.146ms)
+

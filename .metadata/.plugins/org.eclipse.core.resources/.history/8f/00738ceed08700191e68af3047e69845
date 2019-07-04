@@ -1,0 +1,32 @@
+
+#include <vector>
+#include <set>
+#include <iostream>
+#include <cstdio>
+
+using namespace std;
+
+const int INF = 1000000000;
+const int MAX_NODES = 1000 + 10;
+const int TYPES = 1024 + 10;
+
+
+vector<pair<int, int>> connectionMap;
+int typesOffered[MAX_NODES];
+int traveledPaths[MAX_NODES][TYPES];
+set<pair<int, pair<int, int> > > decisions;
+int centers, roads, types;
+int cti, cni;
+int typesMask;
+
+int main(){
+	cin >> centers >> roads >> types;
+	for(int center = 1; center <= centers; center++){
+		cin >> cni;
+		for(int i = 0; i < cni; i++){
+			cin >> cti;
+			typesOffered[center] |= (1 << cti);
+		}
+		cout << typesOffered[center];
+	}
+}

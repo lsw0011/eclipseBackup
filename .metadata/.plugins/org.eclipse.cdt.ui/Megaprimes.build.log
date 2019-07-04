@@ -1,0 +1,23 @@
+15:35:04 **** Incremental Build of configuration Debug for project Megaprimes ****
+make all 
+Building file: ../src/Megaprimes.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/Megaprimes.d" -MT"src/Megaprimes.o" -o "src/Megaprimes.o" "../src/Megaprimes.cpp"
+../src/Megaprimes.cpp: In function ‘std::vector<int> getPrimesTill(int)’:
+../src/Megaprimes.cpp:41:19: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for(int i = 0; i <= isPrime.size(); i++){
+                 ~~^~~~~~~~~~~~~~~~~
+../src/Megaprimes.cpp: In function ‘int countMegaPrimes(long long int, long long int)’:
+../src/Megaprimes.cpp:66:19: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for(int i = 0; i < isPrime.size(); i++){
+                 ~~^~~~~~~~~~~~~~~~
+Finished building: ../src/Megaprimes.cpp
+ 
+Building target: Megaprimes
+Invoking: GCC C++ Linker
+g++  -o "Megaprimes"  ./src/Megaprimes.o   
+Finished building target: Megaprimes
+ 
+
+15:35:05 Build Finished. 0 errors, 2 warnings. (took 1s.208ms)
+

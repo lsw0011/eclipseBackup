@@ -1,0 +1,58 @@
+//============================================================================
+// Name        : gloriousPrimes.cpp
+// Author      : 
+// Version     :
+// Copyright   : Your copyright notice
+// Description : Hello World in C++, Ansi-style
+//============================================================================
+
+#include <iostream>
+using namespace std;
+
+int main() {
+	int flag3 = 0;
+	int flag4 = 0;
+	int flag5 = 0;
+	int four = 0;
+	int five = 0;
+	int num = 0;
+	int primes[15] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43} ;
+	for(int i = 10000; i < 1000000; i++){
+		int three = 0;
+		three += i % 10;
+		three += i / 10 % 10;
+		three += i / 100 % 10;
+		if( i >= 1000){
+			four = three + i / 1000 % 10;
+		}
+		if( i >= 10000){
+			five = four + i / 10000 % 10;
+		}
+		cout << three << endl;
+		cout << four << endl;
+		cout << five << endl;
+		for(int prime3: primes){
+			if(three == flag3){
+				flag3 = 1;
+			}
+
+		}
+		for(int prime4: primes){
+			if(three == flag3){
+				flag4 = 1;
+			}
+		}
+		for(int prime5: primes){
+			if(three == flag3){
+				flag5 = 1;
+			}
+		}
+		if(flag3 && flag4 && flag5){
+			num++;
+		}
+		flag3, flag4, flag5 = 0, 0, 0;
+
+	}
+	cout << num;
+	return 0;
+}
