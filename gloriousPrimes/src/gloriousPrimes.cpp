@@ -3,13 +3,14 @@
 #include <algorithm>
 #include <vector>
 #include <iostream>
+
+
 using namespace std;
 #define mod 1000000007
 #define N 400000
 #define ll long long
 
 bool is_prime(int n) {
-	cout << "is_prime" << endl;
     if (n < 2) return false;
     for (int d = 2; d < n; d++) {
         if (n % d == 0) return false;
@@ -18,7 +19,6 @@ bool is_prime(int n) {
 }
 
 int sumd(int n) {
-	cout << (n == 0 ? 0 : n % 10 + sumd(n / 10)) << endl;
     return n == 0 ? 0 : n % 10 + sumd(n / 10);
 }
 
@@ -79,7 +79,9 @@ int main() {
     add_result(3,303);
     add_result(4,s4c);
 
-    for (int v = 0; v < s4c; v++) pct[s4[v]]++;
+    for (int v = 0; v < s4c; v++) {
+    	pct[s4[v]]++;
+    }
 
     for (int n = 5; n <= N; n++) {
         for (int v = 0; v < s04c; v++) {
@@ -92,6 +94,7 @@ int main() {
             if (b) {
                 ct[a] += b;
                 s += b;
+                cout << a << " "<< ct[a] << endl;
             }
         }
         s %= mod;

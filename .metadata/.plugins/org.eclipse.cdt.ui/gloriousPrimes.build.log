@@ -1,6 +1,23 @@
-00:06:11 **** Incremental Build of configuration Debug for project gloriousPrimes ****
+22:10:26 **** Incremental Build of configuration Debug for project gloriousPrimes ****
 make all 
-make: Nothing to be done for 'all'.
+Building file: ../src/gloriousPrimes.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/gloriousPrimes.d" -MT"src/gloriousPrimes.o" -o "src/gloriousPrimes.o" "../src/gloriousPrimes.cpp"
+../src/gloriousPrimes.cpp: In function ‘bool good(int)’:
+../src/gloriousPrimes.cpp:26:107: warning: suggest parentheses around ‘&&’ within ‘||’ [-Wparentheses]
+     return n < 100 || is_prime(sumd(n % 1000)) && is_prime(sumd(n % 10000)) && is_prime(sumd(n % 100000)) && good(n / 10);
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~
+../src/gloriousPrimes.cpp: In function ‘int main()’:
+../src/gloriousPrimes.cpp:75:23: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     for (int i = 0; i < s04v.size(); i++) s04[s04c++] = s04v[i];
+                     ~~^~~~~~~~~~~~~
+Finished building: ../src/gloriousPrimes.cpp
+ 
+Building target: gloriousPrimes
+Invoking: GCC C++ Linker
+g++  -o "gloriousPrimes"  ./src/gloriousPrimes.o   
+Finished building target: gloriousPrimes
+ 
 
-00:06:12 Build Finished. 0 errors, 0 warnings. (took 574ms)
+22:10:27 Build Finished. 0 errors, 2 warnings. (took 1s.384ms)
 
